@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <form #uyeKayit='ngForm'>
+        <div class="card">
+          <div class="card-header">Üye Kayıt Ekranı</div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Ad Soyad</label>
+              <input type="text" name="adsoyad" class="form-control" #adsoyad [(ngModel)]="secUye.adsoyad">
+            </div>
+            <div class="form-grouo">
+              <label>E-posta</label>
+              <input type="text" name="mail" class="form-control" #mail>
+            </div>
+            <div class="form-grouo">
+              <label>Şifre</label>
+              <input type="password" name="password" class="form-control" #password>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-outline-primary btn-inline-block w-50" (click)="UyeKayit(mail.value,password.value)">Üye ol</button>
+            <button class="btn btn-link ml-2" [routerLink]="['/login']">Giriş Yap</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

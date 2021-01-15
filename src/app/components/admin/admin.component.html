@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-4">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action btn" (click)="TumKitaplarGoster()">Tüm Kitaplar</a>
+        <a class="list-group-item list-group-item-action btn" (click)="TumKategorilerGoster()">Tüm Kategoriler</a>
+        <a class="list-group-item list-group-item-action btn" (click)="EkleContent()">Kitap-Kategori Ekle</a>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="tab-content">
+        <div class="tab-pane fade show active" *ngIf="tumKitaplar">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Kitap Adı</th>
+                <th>Yazar</th>
+                <th>Fiyat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let kitap of kitaplar">
+                <td>{{kitap.ad}}</td>
+                <td>{{kitap.yazar}}</td>
+                <td>{{kitap.fiyat | currency:'₺'}}</td>
+                <td><button class="btn btn-outline-warning btn-sm" (click)="KitapDuzenleBtn(kitap)">Düzenle</button></td>
+                <td><button class="btn btn-outline-danger btn-sm">Sil</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane fade show active" *ngIf="tumKategoriler">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Kategori Adı</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let kategori of kategoriler">
+                <td>{{kategori.ad}}</td>
+                <td><button class="btn btn-outline-warning btn-sm" (click)="DuzenleBtn(kategori)">Düzenle</button></td>
+                <td><button class="btn btn-outline-danger btn-sm" (click)="KategoriSil(kategori.key)">Sil</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane fade show active" *ngIf="ekleContent">
+          <div class="card">
+            <div class="card-header">Kategori Ekle</div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Kategori Adı</label>
+                <input type="text" class="form-control" name="katAdi" ngModel #katAdi [(ngModel)]="secKategori.ad">
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-outline-success" (click)="KategoriEkle()">Ekle</button>
+              <button class="btn btn-outline-danger" (click)="KatIptal()">İptal</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Kitap Ekle</div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Görsel</label>
+                <input type="file" class="form-control" (change)='DosyaSec($event)'>
+                <button class="btn btn-primary btn-sm"(click)="ResimYukle()">Yükle</button>
+              </div>
+              <div class="form-group">
+                <label>Kitap Adı</label>
+                <input type="text" class="form-control" name="kitapAdi" #kitapAdi [(ngModel)]="secKitap.ad">
+              </div>
+              <div class="form-group">
+                <label>Yazar Adı</label>
+                <input type="text" class="form-control" name="yazarAdi" #yazarAdi [(ngModel)]="secKitap.yazar">
+              </div>
+              <div class="form-group">
+                <label>Yayınevi</label>
+                <input type="text" class="form-control" name="yayinEvi" #yayinEvi [(ngModel)]="secKitap.yayinevi">
+              </div>
+              <div class="form-group">
+                <label>Fiyat</label>
+                <input type="number" class="form-control" name="fiyat" #fiyat [(ngModel)]="secKitap.fiyat">
+              </div>
+              <div class="form-group">
+                <label>Kategori</label>
+                <select class="form-control" [(ngModel)]="secKitap.kategoriKey">
+                  <option *ngFor="let kategori of kategoriler" [value]='kategori.key'>{{kategori.ad}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Resim seçin</label>
+                <select class="form-control" ngModel [(ngModel)]="secKitap.url">
+                  <option *ngFor="let resim of resimler" [value] = 'resim.url' >{{resim.ad}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="form-group">
+                <button class="btn btn-outline-success" (click)="KitapEkle()">Kaydet</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade show active" *ngIf="duzenleContent" >
+          <div class="card">
+            <div class="card-header">Kategori Düzenle</div>
+            <div class="card-body">
+              <div class="faron-group">
+                <label>Kategori Adı</label>
+                <input type="text" class="form-control" name="adi" #adi ngModel [(ngModel)]="secKategori.ad">
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-outline-success btn-sm" (click)="KategoriDuzenle()">Kaydet</button>
+              <button class="btn btn-outline-danger btn-sm" (click)="KatIptal()">İptal</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Kitap Düzenle</div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Görsel</label>
+                <input type="file" class="form-control" (change)='DosyaSec($event)'>
+                <button class="btn btn-primary btn-sm"(click)="ResimYukle()">Yükle</button>
+              </div>
+              <div class="form-group">
+                <label>Kitap Adı</label>
+                <input type="text" class="form-control" name="kitapAdi" #kitapAdi [(ngModel)]="secKitap.ad">
+              </div>
+              <div class="form-group">
+                <label>Yazar Adı</label>
+                <input type="text" class="form-control" name="yazarAdi" #yazarAdi [(ngModel)]="secKitap.yazar">
+              </div>
+              <div class="form-group">
+                <label>Yayınevi</label>
+                <input type="text" class="form-control" name="yayinEvi" #yayinEvi [(ngModel)]="secKitap.yayinevi">
+              </div>
+              <div class="form-group">
+                <label>Fiyat</label>
+                <input type="number" class="form-control" name="fiyat" #fiyat [(ngModel)]="secKitap.fiyat">
+              </div>
+              <div class="form-group">
+                <label>Kategori</label>
+                <select class="form-control" [(ngModel)]="secKitap.kategoriKey">
+                  <option *ngFor="let kategori of kategoriler" [value]='kategori.key'>{{kategori.ad}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Resim seçin</label>
+                <select class="form-control" ngModel [(ngModel)]="secKitap.url">
+                  <option *ngFor="let resim of resimler" [value] = 'resim.url' >{{resim.ad}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="form-group">
+                <button class="btn btn-outline-success" (click)="KitapEkle()">Kaydet</button>
+                <button class="btn btn-outline-danger ml-2" (click)="KitapDuzenleIptal()">İptal</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

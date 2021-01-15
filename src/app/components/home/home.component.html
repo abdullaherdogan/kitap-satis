@@ -1,0 +1,28 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="card-group">
+        <div class="row">
+          <div class="card ml-2 mt-2" style="max-width: 200px;" *ngFor="let kitap of kitaplar">
+            <img [src]="kitap.url" class="card-img-top img-fluid rounded" style="height: 300px;" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{kitap.ad}}</h5>
+              <p class="card-text">{{kitap.yazar}}</p>
+            </div>
+            <div class="card-footer">
+              <p class="card-text"><small class="text-muted">{{kitap.fiyat|currency:'₺'}}</small></p>
+              <button class="btn btn-outline-success btn-sm" (click)="SepetBtn(kitap.key)">Sepete Ekle</button>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h5>Kategoriye Göre Ara</h5>
+      <button type="button" class="list-group-item list-group-item-action" (click)="KitaplariGetir()">Tüm Kitaplar</button>
+      <div class="list-group" *ngFor="let kategori of kategoriler">
+        <button type="button" class="list-group-item list-group-item-action" (click)="KitapByKategoriKey(kategori.key)">{{kategori.ad}}</button>
+      </div>
+    </div>
+  </div>
+</div>
