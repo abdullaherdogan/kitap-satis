@@ -10,13 +10,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(public fbservis: FbservisService) { }
   adminControl:boolean = false
-  ngOnInit(): void {
-    var user = JSON.parse(localStorage.getItem("user"))
-    if (user.email =="admin@admin.com") {
-      this.adminControl = true
-    } else {
-      this.adminControl = false
-    }
+  ngOnInit(): void {   
   }
   OturumKapat(){
     this.fbservis.OturumKapa()

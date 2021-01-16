@@ -57,17 +57,22 @@ export class HomeComponent implements OnInit {
   }
 
   //sepet
-  SepetBtn(key:string){
+  SepetBtn(kitap:Kitap){
     var user = JSON.parse(localStorage.getItem("user"));
-    this.sepet.uid  = user.uid
-    this.sepet.kitapKey = key
-    console.log(this.sepet.uid)
-    console.log(this.sepet.kitapKey)
-    
-  }
-  SepeteEkle(sepet:Sepet){
-    this.fbservis.SepeteEkle(sepet).then(d=>{
-      alertify.success('Ürün sepete eklendi')
+    if (user) {
+      this.sepet.uid  = user.uid
+    this.sepet.ad =kitap.ad
+    this.sepet.fiyat =kitap.fiyat
+    this.sepet.kategoriKey = kitap.kategoriKey
+    this.sepet.url = kitap.url 
+    this.sepet.yazar = kitap.yazar
+    this.sepet.yayinevi = kitap.yayinevi
+    this.fbservis.SepeteEkle(this.sepet).then(d=>{
+      alertify.success(kitap.ad+'Sepete Eklendi')
     })
+    } else {
+      alertify.warning('Alışveriş Yapabilmek İçin Oturum Açmanız Gerekli')
+    }
   }
+  
 }

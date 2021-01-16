@@ -93,6 +93,9 @@ SepeteEkle(sepet:Sepet){
 SepetByUid(uid:string){
   return this.db.list('/Sepetler',q=>q.orderByChild("uid").equalTo(uid))
 }
+SepettenCikar(key:string){
+  return this.sepetRef.remove(key)
+}
 //resimbyKey
 ResimListele(){
   return this.imageRef;
@@ -103,6 +106,14 @@ ResimByKey(key:string){
 //oturum kontrol
 OturumKontrol(){
   if (localStorage.getItem("user")) {
+    return true
+  } else {
+    return false
+  }
+}
+AdminMi(){
+  var user = JSON.parse(localStorage.getItem("user"))
+  if (user?.email == "admin@admin.com") {
     return true
   } else {
     return false
