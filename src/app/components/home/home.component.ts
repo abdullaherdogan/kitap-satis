@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     this.fbservis.KitapListele().snapshotChanges().subscribe(data => {
       this.kitaplar = [];
       data.forEach(satir => {
-        var kits = { ...satir.payload.toJSON()};
+        var kits = { ...satir.payload.toJSON(),key:satir.key};
         this.kitaplar.push(kits as Kitap);
       });
     });
