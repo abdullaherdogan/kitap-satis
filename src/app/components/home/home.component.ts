@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
     })
   }
   DetayaGit(kitap:Kitap){
-    this.router.navigate(['/detay',kitap.key]);
+    this.router.navigate(['/detay/'+kitap.key]);
   }
 
   //kategori işlemleri
