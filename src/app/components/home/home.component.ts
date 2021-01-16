@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
       alertify.success(kitap.ad+'Sepete Eklendi')
     })
     } else {
-      alertify.warning('Alışveriş Yapabilmek İçin Oturum Açmanız Gerekli')
+      alertify.warning('Alışveriş Yapabilmek İçin Giriş Yapmanız Gerekli')
     }
   }
   
