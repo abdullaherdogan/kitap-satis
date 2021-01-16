@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <button class="btn btn-info" [routerLink]="['']">Anasayfaya Dön</button>
+      <div class="card mt-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img [src]="secKitap.url" class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><b>Kitap Adı: </b>{{secKitap.ad}}</h5>
+              <p class="card-text"><b>Yazar: </b> {{secKitap.yazar}}</p>
+              <p class="card-text"><b>Fiyat: </b> {{secKitap.fiyat|currency:'₺'}}</p>
+              <p class="card-text"><b>Yayınevi: </b> {{secKitap.yayinevi}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

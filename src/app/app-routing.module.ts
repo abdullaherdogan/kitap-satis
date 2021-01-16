@@ -1,3 +1,4 @@
+import { DetayComponent } from './components/detay/detay.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { SepetComponent } from './components/sepet/sepet.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -12,6 +13,11 @@ const redirectLogin =()=>redirectUnauthorizedTo(['login'])
 const routes: Routes = [
   {path:'',component: HomeComponent},
   {path: 'login',component: LoginComponent},
+  {path:'detay/:key',component: DetayComponent,
+  canActivate:[AngularFireAuthGuard],
+  data:{
+    authGuardPipe: redirectLogin
+  }},
   {path: 'register',component: RegisterComponent},
   {path:'sepet',component: SepetComponent,
    canActivate:[AngularFireAuthGuard],

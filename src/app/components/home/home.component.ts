@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Sepet } from './../../models/sepet';
 import { Kategori } from './../../models/kategori';
 import { Kitap } from './../../models/kitap';
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
   sepet:Sepet = new Sepet();
   kitKeyForSepet:string;
 
-  constructor(public fbservis:FbservisService) { }
+  constructor(public fbservis:FbservisService,public router:Router) { }
 
   ngOnInit(): void {
     this.KitaplariGetir()
@@ -43,7 +44,9 @@ export class HomeComponent implements OnInit {
       })
     })
   }
-
+  DetayaGit(kitap:Kitap){
+    this.router.navigate(['/detay',kitap.key]);
+  }
 
   //kategori işlemleri
   KategoriGetir() {

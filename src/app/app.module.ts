@@ -15,7 +15,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { SepetComponent } from './components/sepet/sepet.component';
-import {AngularFireStorageModule} from '@angular/fire/storage'
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import { DetayComponent } from './components/detay/detay.component'
 
 
 
@@ -27,7 +28,8 @@ import {AngularFireStorageModule} from '@angular/fire/storage'
     RegisterComponent,
     NavbarComponent,
     SepetComponent,
-    AdminComponent
+    AdminComponent,
+    DetayComponent
   ],
   imports: [
     BrowserModule,

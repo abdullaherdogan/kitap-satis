@@ -11,7 +11,7 @@ declare let alertify:any
 })
 export class SepetComponent implements OnInit {
   uid:string
-  sepettekiler:Sepet[]
+  sepettekiler:Sepet[]= []
   constructor(public fbservis:FbservisService) { }
 
   ngOnInit(): void {
